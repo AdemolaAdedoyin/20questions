@@ -32,7 +32,7 @@ VUE_APP_NEW_BASE_URL="THE BACKEND API"
 
 To start the server, run this on your terminal
 ```
-VUE_APP_NEW_BASE_URL=value npm run serve
+VUE_APP_NEW_BASE_URL=value npm start
 ```
 
 ### Compiles and minifies for production
