@@ -171,7 +171,7 @@ import { loadAnimation } from 'lottie-web'
 import successImg from '@/assets/check.json'
 import axios from 'axios'
 
-const NEW_BASE_URL = process.env.NEW_BASE_URL || 'http://8c23-197-210-47-243.ngrok.io';
+const NEW_BASE_URL = process.env.VUE_APP_NEW_BASE_URL || 'http://8c23-197-210-47-243.ngrok.io';
 
 export default {
   data() {
