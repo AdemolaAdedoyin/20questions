@@ -1,17 +1,25 @@
-import eslint from '@eslint/js'
+import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
-import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
-export default [
+export default tseslint.config(
   { ignores: ['dist', 'coverage', 'playwright-report', 'test-results'] },
-  eslint.configs.recommended,
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
-  ...vueTsEslintConfig(),
+  {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+      },
+    },
+  },
   {
     files: ['**/*.{js,ts,vue}'],
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
     },
   },
-]
+)
