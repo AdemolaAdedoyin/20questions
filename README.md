@@ -19,6 +19,24 @@ The original project was a Vue 2 prototype coupled to a temporary authentication
 - Responsive, accessible UI built without a CSS framework
 - Unit tests, end-to-end coverage, linting, type checking, and CI
 
+## Roadmap
+
+### Multiplayer rooms
+
+A future v3 milestone is real-time multiplayer across separate browsers/devices. Planned scope:
+
+- Create or join a room with a short code or invite link
+- Show a waiting state until a second player joins
+- Synchronize turns, questions, answers, guesses, and game state in real time
+- Keep the secret word private to Player 1
+- Support reconnect/resume behavior
+- Move authoritative game state to a backend service
+- Use WebSockets/Socket.IO for realtime events
+- Use Redis or another shared store for room/session state
+- Add multi-browser end-to-end coverage
+
+The current local pass-and-play mode remains the simplest and fastest way to play on one device.
+
 ## Stack
 
 - Vue 3
