@@ -1,50 +1,63 @@
-# 20questions
+# 20 Questions
 
-# Built With
+A polished, local two-player version of the classic guessing game. One player chooses a secret word, the other asks up to twenty yes/no-style questions and tries to guess it.
 
-The system was built using vuejs, while consuming my authentication Api using nodejs
+## Why this version
 
-# Getting Started
+The original project was a Vue 2 prototype coupled to a temporary authentication API. Version 2 removes the unnecessary backend dependency and focuses on a reliable, self-contained game experience that can be deployed as a static frontend.
 
-## Prerequisites
+## Features
 
-Your system must have npm and node installed, and this can be done on the terminal with 
+- Two-player pass-and-play flow with privacy handoff screens
+- Explicit question and word-guess actions
+- Yes / No / Sometimes answers
+- 20-question limit with progress tracking
+- Full round history
+- Local game persistence with `localStorage`
+- Responsive, accessible UI built without a CSS framework
+- Unit tests, end-to-end coverage, linting, type checking, and CI
 
-```
-- npm install npm@latest -g
-```
+## Stack
 
-## Project setup
-```
-Clone the repo https://github.com/AdemolaAdedoyin/20questions.git
+- Vue 3
+- TypeScript
+- Vite
+- Vitest
+- Playwright
+- ESLint + Prettier
+- GitHub Actions
+
+## Local development
+
+```bash
 npm install
+npm run dev
 ```
 
-## Usage
+Open the local URL printed by Vite.
 
-NB: The backend is locally hosted but exposed using ngrok. If at any point authentication fails, kindly reach out to me via email, and this will be updated and shared with you
+## Quality checks
 
-Configs to be passed when trying to start the server
-
-```
-VUE_APP_NEW_BASE_URL="THE BACKEND API"
-```
-
-To start the server, run this on your terminal
-```
-VUE_APP_NEW_BASE_URL=value npm start
-```
-
-### Compiles and minifies for production
-```
+```bash
+npm run lint
+npm run typecheck
+npm run test
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-# Contact 
+For end-to-end tests, install the Playwright browser once:
 
-Kindly reach out if any issue is encountered or token and keys are needed, adedoyinademola397@gmail.com
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
 
+## Deployment
+
+The app is designed for zero-config deployment on Vercel. Import this repository, keep the Vite framework preset, and deploy from `main`.
+
+## Architecture
+
+Game state is isolated in `src/composables/useGame.ts`; input rules live in `src/utils/validation.ts`; reusable game presentation is split into focused components under `src/components/game`.
+
+The app intentionally uses local state instead of a backend because multiplayer networking and authentication are not required for the pass-and-play product experience.
