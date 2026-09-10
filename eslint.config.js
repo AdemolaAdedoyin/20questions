@@ -15,6 +15,11 @@ export default tseslint.config(
         parser: tseslint.parser,
       },
     },
+    rules: {
+      'vue/max-attributes-per-line': 'off',
+      'vue/singleline-html-element-content-newline': 'off',
+      'vue/html-self-closing': 'off',
+    },
   },
   {
     files: ['**/*.{js,ts,vue}'],
