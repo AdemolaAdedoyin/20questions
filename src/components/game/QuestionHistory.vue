@@ -13,12 +13,15 @@ const label = (answer?: string) => answer ? answer.charAt(0).toUpperCase() + ans
       <span>{{ items.length }} turn{{ items.length === 1 ? '' : 's' }}</span>
     </div>
     <ol>
-      <li v-for="(item, index) in items" :key="item.id">
+      <li v-for="(item, index) in items" :key="item.id" :class="{ 'history-guess': item.type === 'guess' }">
         <div>
           <span class="history-index">{{ index + 1 }}</span>
-          <p>{{ item.prompt }}</p>
+          <div class="history-copy">
+            <span class="history-kind">{{ item.type === 'guess' ? 'Guess' : 'Question' }}</span>
+            <p>{{ item.prompt }}</p>
+          </div>
         </div>
-        <span class="answer-pill">{{ item.type === 'guess' ? 'Incorrect guess' : label(item.answer) }}</span>
+        <span class="answer-pill">{{ item.type === 'guess' ? 'Incorrect' : label(item.answer) }}</span>
       </li>
     </ol>
   </section>
