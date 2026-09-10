@@ -2,6 +2,8 @@
 
 A polished, local two-player version of the classic guessing game. One player chooses a secret word, the other asks up to twenty yes/no-style questions and tries to guess it.
 
+**Live demo:** https://20questions-ten.vercel.app/
+
 ## Why this version
 
 The original project was a Vue 2 prototype coupled to a temporary authentication API. Version 2 removes the unnecessary backend dependency and focuses on a reliable, self-contained game experience that can be deployed as a static frontend.
@@ -12,7 +14,7 @@ The original project was a Vue 2 prototype coupled to a temporary authentication
 - Explicit question and word-guess actions
 - Yes / No / Sometimes answers
 - 20-question limit with progress tracking
-- Full round history
+- Full round history with question/guess distinction
 - Local game persistence with `localStorage`
 - Responsive, accessible UI built without a CSS framework
 - Unit tests, end-to-end coverage, linting, type checking, and CI
@@ -26,6 +28,7 @@ The original project was a Vue 2 prototype coupled to a temporary authentication
 - Playwright
 - ESLint + Prettier
 - GitHub Actions
+- Vercel
 
 ## Local development
 
@@ -52,9 +55,15 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
+CI also runs a production-dependency security audit. The deployed application has no backend or runtime API dependency; game state is stored locally in the browser.
+
 ## Deployment
 
-The app is designed for zero-config deployment on Vercel. Import this repository, keep the Vite framework preset, and deploy from `main`.
+The production site is deployed on Vercel from `main`:
+
+https://20questions-ten.vercel.app/
+
+No environment variables are required.
 
 ## Architecture
 

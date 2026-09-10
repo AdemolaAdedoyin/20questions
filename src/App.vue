@@ -15,6 +15,15 @@ const promptType = ref<TurnType>('question')
 const error = ref('')
 
 const progress = computed(() => `${game.state.value.questionsUsed} / ${game.maxQuestions}`)
+const isFinished = computed(() => ['won', 'lost'].includes(game.state.value.phase))
+const finishedStatus = computed(() => {
+  if (game.state.value.phase === 'won') {
+    const count = game.state.value.questionsUsed
+    return `Solved in ${count} question${count === 1 ? '' : 's'}`
+  }
+
+  return '20 questions used'
+})
 
 const submitPlayers = () => {
   error.value = validateName(playerOneInput.value) || validateName(playerTwoInput.value)
@@ -54,12 +63,12 @@ const reset = () => {
     <header class="site-header">
       <a class="brand" href="#" @click.prevent="reset">20Q</a>
       <div v-if="game.state.value.phase !== 'setup'" class="status-group">
-        <span>{{ progress }} questions</span>
+        <span>{{ isFinished ? finishedStatus : `${progress} questions` }}</span>
         <button class="text-button" type="button" @click="reset">New game</button>
       </div>
     </header>
 
-    <section class="game-card">
+    <section class="game-card" :class="{ 'game-card--compact': !['setup', 'guessing'].includes(game.state.value.phase) }">
       <div v-if="game.state.value.phase === 'setup'" class="setup-grid">
         <div class="intro">
           <p class="eyebrow">Classic game · Two players · One device</p>
@@ -144,6 +153,7 @@ const reset = () => {
         <span class="result-mark">✓</span>
         <p class="eyebrow">Correct</p>
         <h1>{{ game.state.value.playerTwo }} got it.</h1>
+        <p class="result-summary">{{ finishedStatus }}</p>
         <p class="muted large">The secret word was <strong>{{ game.state.value.secretWord }}</strong>.</p>
         <button class="primary" type="button" @click="reset">Play again</button>
       </div>
@@ -152,13 +162,14 @@ const reset = () => {
         <span class="result-mark">20</span>
         <p class="eyebrow">Question limit reached</p>
         <h1>{{ game.state.value.playerOne }} wins this round.</h1>
+        <p class="result-summary">All twenty questions were used.</p>
         <p class="muted large">The secret word was <strong>{{ game.state.value.secretWord }}</strong>.</p>
         <button class="primary" type="button" @click="reset">Play again</button>
       </div>
     </section>
 
     <footer>
-      <span>Built with Vue 3 + TypeScript</span>
+      <span>Built with Vue 3 · TypeScript · Vite</span>
       <a href="https://github.com/AdemolaAdedoyin/20questions" target="_blank" rel="noreferrer">View source ↗</a>
     </footer>
   </main>
